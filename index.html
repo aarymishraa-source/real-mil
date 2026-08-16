@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RE:AL — Pause. Question. Verify.</title>
+    <meta name="description" content="A playable concept demo about how information spreads. UNESCO Youth Hackathon 2026." />
+    <!--
+      The RE:AL eye - ART_DIRECTION section 4.1 lists the favicon as one of the
+      symbol's three jobs. Declared explicitly because the browser's default
+      request for /favicon.ico was the one 404 in the build, and a clean console
+      is something the README claims.
+    -->
+    <link rel="icon" type="image/png" href="/art/eye-symbol.png" />
+    <!--
+      Boot background. This is the first paint, so it must not wait on the JS
+      bundle to discover it - ART_DIRECTION section 5. Never lazy.
+    -->
+    <link rel="preload" as="image" href="/art/city-boot.jpg" fetchpriority="high" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,700;112,900&family=IBM+Plex+Mono:wght@400&family=Inter+Tight:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+node_modules
+dist
+# `tsc -b` incremental cache - a build artifact, not source
+tsconfig.tsbuildinfo
+.DS_Store
+*.local
+.vscode/*
+!.vscode/extensions.json

@@ -1,0 +1,705 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /*
+   * THE PALETTE, AS REAL CSS.
+   *
+   * Pulled from tailwind.config.js via theme(), not retyped - the config stays
+   * the single source of truth and these cannot drift away from it.
+   *
+   * They exist because a lot of this project's CSS is hand-written rather than
+   * utility classes: the atmosphere layer, the panel chrome, the duotone and
+   * screenshot treatments, and the Verification Lens still to come. The --name
+   * syntax used throughout CLAUDE.md and ART_DIRECTION.md has to be working CSS
+   * in those places, not documentation.
+   *
+   * The failure mode this prevents is silent. A hand-written rule referencing
+   * an undeclared custom property is simply dropped and the element inherits -
+   * no error, no warning, just the wrong colour. That is exactly how a missing
+   * text-nova-ink went unnoticed until it was measured.
+   */
+  :root {
+    color-scheme: dark;
+
+    /* Surfaces - the world */
+    --void: theme("colors.void");
+    --surface: theme("colors.surface");
+    --raised: theme("colors.raised");
+    --line: theme("colors.line");
+
+    /* Text */
+    --ink: theme("colors.ink.DEFAULT");
+    --ink-mute: theme("colors.ink.mute");
+    --ink-faint: theme("colors.ink.faint");
+
+    /* Semantic - these are rules, not decoration. CLAUDE.md section 3. */
+    --verified: theme("colors.verified");
+    --unverified: theme("colors.unverified");
+    --nova: theme("colors.nova.DEFAULT");
+    --nova-ink: theme("colors.nova.ink");
+    --pending: theme("colors.pending");
+    --deep: theme("colors.deep");
+  }
+  html, body, #root {
+    height: 100%;
+  }
+  body {
+    @apply bg-void text-ink font-ui antialiased;
+  }
+
+  /* Accessibility floor - CLAUDE.md section 5. Do not remove. */
+  :focus-visible {
+    outline: 2px solid theme("colors.verified");
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: theme("colors.verified");
+    color: theme("colors.void");
+  }
+}
+
+@layer components {
+  /*
+   * Mono label: metadata, evidence, anything forensic.
+   *
+   * ONLY IBM Plex Mono 400 IS LOADED. The family has no variable version on
+   * Google Fonts, so every weight is a separate file - 500 was costing 15KB to
+   * render nothing, because no mono element in the build ever asked for it.
+   *
+   * If you need `font-medium` on a mono element, add the weight back to the
+   * font request in index.html at the same time. Without it the browser will
+   * synthesise or fall back to 400 and the change will look like it worked.
+   * (Archivo and Inter Tight are the opposite case: both are variable, so one
+   * file covers all their weights and removing one saves nothing. See
+   * DECISIONS.md - we got this backwards once already.)
+   */
+  .label-mono {
+    @apply font-mono text-2xs uppercase tracking-[0.04em] text-ink-mute;
+  }
+  .hairline {
+    @apply border border-line;
+  }
+
+  /*
+   * ART DIRECTION section 1 - the atmosphere layer.
+   * "A surveillance terminal running in a dark room in a city at night."
+   * Values are exactly as specified in docs/ART_DIRECTION.md. Do not tune them
+   * casually: the grain opacity and the bleed colours are the whole effect.
+   * All four are static. Nothing here animates, so reduced-motion keeps them.
+   */
+  .bleed {
+    position: absolute;
+    inset: 0;
+    /*
+     * Opacities raised from the original 0.28 / 0.16 / 0.10. Those were written
+     * for light landing on a flat page; it actually passes three stacked alpha
+     * layers (bleed -> panel 0.72 -> post 0.62), which left only ~10% reaching a
+     * post surface and made the layer invisible. Same colours, same blur, same
+     * positions - only the intensity changed.
+     */
+    background:
+      radial-gradient(60rem 40rem at 18% 12%, rgba(30, 58, 138, 0.45), transparent 60%),
+      radial-gradient(50rem 36rem at 82% 68%, rgba(124, 58, 237, 0.26), transparent 62%),
+      radial-gradient(40rem 30rem at 50% 110%, rgba(34, 211, 238, 0.18), transparent 60%);
+    filter: blur(20px);
+  }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .scan {
+    position: absolute;
+    inset: 0;
+    opacity: 0.5;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.014) 0px,
+      rgba(255, 255, 255, 0.014) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+
+  .vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(120% 90% at 50% 45%, transparent 40%, rgba(0, 0, 0, 0.55) 100%);
+  }
+
+  /*
+   * ART DIRECTION section 4.3 - duotone treatment.
+   * Pulls every photograph toward --deep so seven separately generated images
+   * read as one world instead of a mood board. Applied to the wrapper, not the
+   * <img>: ::after does not render on a replaced element. position:relative is
+   * required for that overlay to land.
+   *
+   * EXCEPTION: the sponsored post opts out. See section 4.3.
+   */
+  .art {
+    position: relative;
+    filter: saturate(0.45) contrast(1.08) brightness(0.85);
+  }
+  /*
+   * 0.12, down from 0.22.
+   *
+   * mix-blend-mode: color replaces hue and saturation and preserves
+   * luminosity, so this alpha controls COLOUR, not brightness. At 0.22 it
+   * pushed every hue to the same blue and the warm lit windows of the school
+   * stopped separating from the cold facade - the post reads as a dark smear
+   * when its whole job is being recognisable as a school. Halving it restores
+   * the warm/cool separation that makes a subject identifiable while the
+   * images still sit together as one world.
+   */
+  .art::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 58, 138, 0.12);
+    mix-blend-mode: color;
+  }
+
+  /*
+   * ART DIRECTION section 4.5 - photographed screenshots.
+   *
+   * A photo of white paper is a large, uniformly lit mass. The 4.3 duotone
+   * cannot touch it: mix-blend-mode: color replaces hue and saturation and
+   * preserves luminosity by definition, and near-white paper has almost no
+   * saturation to shift. Measured, the notice had the LOWEST peak of the four
+   * feed images but 2.8x the mean of the next brightest - it is a mass problem,
+   * not a highlight problem.
+   *
+   * So: a luminosity overlay, which sets luminosity and leaves hue and
+   * saturation alone. Paints under .art::after, so the paper is darkened first
+   * and tinted second. Pushing brightness() harder would have flattened the
+   * creases and the focus falloff that make the artefact believable - this
+   * keeps them.
+   *
+   * Opt in per attachment with "treatment": "screenshot" in mission01.json.
+   */
+  .art-screenshot {
+    position: relative;
+  }
+  .art-screenshot::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 19, 32, 0.45);
+    mix-blend-mode: luminosity;
+  }
+
+  /*
+   * The one text field in the build - ART_DIRECTION section 3 allows a focused
+   * input to glow, and this is the only place it applies. The default 2px
+   * outline is replaced rather than removed: a 1px ring plus the soft cast, so
+   * the accessibility floor in CLAUDE.md section 5 still holds.
+   */
+  .field:focus-visible {
+    outline: none;
+    border-color: var(--verified);
+    box-shadow:
+      0 0 0 1px var(--verified),
+      0 0 20px -6px var(--verified);
+  }
+
+  /*
+   * Ruled, like a page - Reflect's answer box.
+   *
+   * It was a default bordered form field sitting under copy insisting that
+   * writing the answer IS the mechanic. Ruling it makes it read as something
+   * you write on rather than something you submit. The rule pitch is locked to
+   * the 22px line-height so the text sits ON the lines; change one and the
+   * other has to follow. background-attachment:local keeps the rules moving
+   * with the text when it scrolls.
+   */
+  .ruled {
+    line-height: 22px;
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 21px,
+      var(--line) 21px,
+      var(--line) 22px
+    );
+    background-attachment: local;
+  }
+
+  /*
+   * Locked, not loading - the evidence slots that are not in this slice.
+   *
+   * They were dashed outlines at 60% opacity, which is the universal visual
+   * language of a skeleton loader. Diagonal hatching is the language of
+   * "unavailable" and cannot be mistaken for "still arriving".
+   */
+  .hatched {
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 5px,
+      rgba(28, 37, 54, 0.55) 5px,
+      rgba(28, 37, 54, 0.55) 6px
+    );
+  }
+
+  /*
+   * THE CASCADE - ART_DIRECTION section 3, animation two of three.
+   *
+   * The post the player shared duplicating down the feed, six copies staggered
+   * 60ms apart. Each lands slightly rotated and slightly redder than the last.
+   * It is supposed to feel bad: this is the only place in the build where the
+   * motion is doing something TO the player rather than for them.
+   *
+   * The outer element carries the drop, an inner wrapper holds the rotation -
+   * otherwise the keyframe would have to know each copy's angle.
+   */
+  @keyframes cascade-drop {
+    from {
+      opacity: 0;
+      transform: translateY(-16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .cascade-item {
+    animation: cascade-drop 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  /*
+   * The stack is clipped and dissolves at its base. Spread down the column at
+   * full size the six copies ran to 1610px - 2.2 viewports - and a cascade you
+   * have to scroll through is a list, not a cascade. Telescoping them into a
+   * fixed 300px well puts all six in one eyeful, which is the only way
+   * repetition reads AS repetition.
+   */
+  .cascade-stack {
+    -webkit-mask-image: linear-gradient(to bottom, #000 66%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 66%, transparent 100%);
+  }
+
+  /*
+   * NOVA PANEL - ART_DIRECTION section 3.
+   *
+   * The edge glows ONLY while she is speaking, and fades when idle. This is
+   * one of the six permitted glows in the entire build; nothing else on this
+   * panel glows, at rest or otherwise. --nova carries the structure (border,
+   * glow, bar fill); every piece of text on it takes --nova-ink.
+   */
+  .nova-panel {
+    border: 1px solid var(--nova);
+    box-shadow: 0 0 0 0 rgba(124, 58, 237, 0);
+    transition: box-shadow 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .nova-panel-speaking {
+    box-shadow: 0 0 40px -14px rgba(124, 58, 237, 0.6);
+  }
+
+  /*
+   * Entrance. Not a full-width slide: CLAUDE.md section 3 spends its whole
+   * motion budget on the Lens, the Cascade and counter ticks, and rules
+   * everything else to "opacity + 8px translate". 8px from the right still
+   * reads as arriving from the edge.
+   */
+  @keyframes nova-in {
+    from {
+      opacity: 0;
+      transform: translateX(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .nova-in {
+    animation: nova-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  /*
+   * The rings react while she speaks. State-driven, not ambient - it runs only
+   * during a response and stops. Reduced motion collapses it via the global
+   * animation-iteration-count override.
+   */
+  @keyframes nova-breathe {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 0.82;
+    }
+    50% {
+      transform: scale(1.04);
+      opacity: 1;
+    }
+  }
+  .nova-breathe {
+    animation: nova-breathe 1600ms ease-in-out infinite;
+  }
+
+  /*
+   * THE VERIFICATION LENS - PROTOTYPE_SPEC section 3.
+   *
+   * The signature moment. Entering INVESTIGATE, the feed desaturates to 20% and
+   * blurs 2px over 300ms while the investigated post stays sharp and lifts.
+   * The room goes quiet and one thing stays in focus - the RE:AL Eye made
+   * literal. One of the three animations CLAUDE.md section 3 permits.
+   *
+   * Split into a base and an -on class so the transition has something to run
+   * from: React mounts .lens, then adds .lens-on a frame later. Under reduced
+   * motion the -on class is applied on the first render and the global
+   * transition-duration override lands it instantly.
+   */
+  .lens {
+    filter: blur(0) saturate(1);
+    transition: filter 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .lens-on {
+    filter: blur(2px) saturate(0.2);
+  }
+
+  /* Lifted out of the lens rather than pushed through it - so it never blurs. */
+  .lens-focus {
+    transition:
+      transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1),
+      box-shadow 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .lens-focus-on {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.8);
+  }
+
+  /*
+   * Evidence revealing itself. NOT a fourth signature animation: CLAUDE.md
+   * section 3 rules everything outside the three permitted ones down to
+   * "opacity + 8px translate, or nothing", and this is exactly that. The
+   * global reduced-motion override collapses it to an instant state change.
+   */
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .reveal {
+    animation: reveal 220ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  /*
+   * The board. A surface to pin documents to, deliberately darker than the
+   * panel it sits in so the cards read as objects on it rather than as more
+   * feed. Never --surface: that is the colour of a post.
+   */
+  .board {
+    background-color: var(--void);
+    background-image: radial-gradient(
+      70% 55% at 50% 0%,
+      rgba(28, 37, 54, 0.55),
+      transparent 70%
+    );
+  }
+
+  /*
+   * ART DIRECTION section 5 - Boot screen.
+   *
+   * The background drifts from scale(1.06) to scale(1.0) over 20s, once, and
+   * settles. `forwards` matters: without it the frame snaps back to 1.06 at the
+   * end, which reads as a glitch rather than a settle.
+   */
+  @keyframes boot-drift {
+    from {
+      transform: scale(1.06);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  .boot-bg {
+    transform: scale(1.06);
+    animation: boot-drift 20s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  /*
+   * Chromatic split - the wordmark only, nowhere else in the build.
+   * The glitch offsets are the same two colours pushed out to 4px for 120ms.
+   * Driven by a class from React rather than a CSS loop, so it stays a discrete
+   * event and can be switched off entirely for reduced motion.
+   */
+  .wordmark {
+    text-shadow:
+      -1.5px 0 rgba(255, 77, 109, 0.55),
+      1.5px 0 rgba(34, 211, 238, 0.55);
+  }
+  .wordmark-glitch {
+    text-shadow:
+      -4px 0 rgba(255, 77, 109, 0.55),
+      4px 0 rgba(34, 211, 238, 0.55);
+  }
+
+  /*
+   * ART DIRECTION section 2 - panel chrome.
+   * Translucent on purpose: the 0.72 alpha plus the backdrop blur is what lets
+   * the light bleed read *through* the panel. Raising the alpha kills the
+   * effect and disconnects the chrome from the atmosphere.
+   * One shadow, for lift. Never a glow - glow is a state, see section 3.
+   */
+  .panel {
+    background: rgba(11, 19, 32, 0.72);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.8);
+  }
+
+  /*
+   * THE OVERVIEW PAGE'S MOTION - scroll-driven, not observer-driven.
+   *
+   * Every animation below is tied to `animation-timeline: view()`: the element
+   * animates as a function of where it sits in the viewport, forwards AND
+   * backwards, on the compositor rather than the main thread.
+   *
+   * This replaced a JavaScript IntersectionObserver implementation, and it is
+   * worth recording why rather than just what:
+   *
+   *   - One-shot reveals are dead on the way back up. Scrolling forward
+   *     animated, scrolling back did nothing, which reads as a page that has
+   *     already been used. Bidirectional is free here.
+   *   - The observer version could LOSE CONTENT. An element that crossed the
+   *     viewport inside a single frame never intersected, never fired, and
+   *     stayed at opacity 0 - text simply missing. It needed a debounced
+   *     scroll listener as a safety net. With `animation-fill-mode: both`, an
+   *     element past the viewport is at its end state by definition. That
+   *     entire class of bug stops being possible, and both the observer and
+   *     its net are deleted.
+   *
+   * THE STATIC STATE IS THE READABLE ONE. Everything outside the @supports
+   * block is the finished, visible appearance - so the ~16% of browsers with
+   * no scroll-timeline support, and anyone with reduced motion, get the whole
+   * page with no animation at all. There is no state in which content is
+   * hidden waiting for something to happen.
+   */
+  .reveal-up,
+  .scroll-reveal .reveal,
+  .scroll-cascade .cascade-item {
+    opacity: 1;
+    transform: none;
+  }
+
+  /*
+   * The BREAKING post arriving in the hero feed. It rests where it lands, so a
+   * reader with no scroll-timeline support and anyone on reduced motion sees
+   * the feed exactly as it ends up - the post is simply there.
+   */
+  .hero-land {
+    transform: none;
+  }
+  /*
+   * The claim ARRIVES; it is never absent. Starting at zero left a hole in the
+   * hero at rest and, worse, left the line beside it accusing the reader about
+   * a post they could not see. It starts present and dim, sits 24px low, and
+   * settles as the reader scrolls - measured at rest, its body text still
+   * clears the 4.5:1 floor.
+   */
+  @keyframes hero-land {
+    from {
+      opacity: 0.6;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /*
+   * NOVA's confidence, falling as you read past it.
+   *
+   * One registered custom property drives both halves - the readout is a CSS
+   * counter and the bar is a scaleX - so the number and the bar cannot
+   * disagree, and neither touches a layout property. Registering it is what
+   * makes an integer animatable at all.
+   */
+  @property --conf {
+    syntax: "<integer>";
+    inherits: true;
+    initial-value: 34;
+  }
+  .confidence-fall {
+    --conf: var(--conf-to, 34);
+  }
+  .conf-readout {
+    counter-reset: conf var(--conf);
+  }
+  .conf-readout::after {
+    content: counter(conf) "%";
+  }
+  .conf-fill {
+    transform: scaleX(calc(var(--conf) / 100));
+    transform-origin: left center;
+  }
+  @keyframes conf-fall {
+    from {
+      --conf: var(--conf-from);
+    }
+    to {
+      --conf: var(--conf-to);
+    }
+  }
+
+  /*
+   * The city threads drawing themselves as the board arrives. `pathLength="1"`
+   * on the lines normalises every thread to a length of 1 regardless of how
+   * far apart two locations ended up, so one dash rule covers all of them.
+   */
+  @keyframes thread-draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  .threads-draw svg line {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      /*
+       * RANGES ARE MEASURED IN SCROLL DISTANCE, NOT PERCENTAGES OF NOTHING.
+       *
+       * The first version ran both ends of every range inside `entry`, and
+       * `entry` spans THE ELEMENT'S OWN HEIGHT - so a 78px paragraph animated
+       * across 39px of scrolling. Everything worked, everything was attached to
+       * a real timeline, and a person turning a wheel saw a single frame flip
+       * from invisible to done. Measured on production: opacity changed on 1 of
+       * 22 wheel notches.
+       *
+       * `cover` spans the element's height PLUS the viewport, so 28% of it is
+       * ~260px on a 900px screen - three or four notches, which is long enough
+       * to read as movement. That is the only number that decides whether
+       * motion exists for a human, and it is now the number under test.
+       */
+      .reveal-up {
+        animation: reveal-up linear both;
+        animation-timeline: view();
+        animation-range: cover calc(2% + var(--reveal-stagger, 0%)) cover
+          calc(30% + var(--reveal-stagger, 0%));
+      }
+
+      /*
+       * The claim landing in the feed, in the hero. Driven by the document's
+       * own scroll rather than by the element's position, because at the very
+       * top of the page there is no "entry" left to animate across.
+       *
+       * NOT parallax: nothing here scrolls at a different rate to the page. One
+       * post arrives, once, over the first 520px, and then the whole hero moves
+       * with everything else.
+       */
+      .hero-land {
+        animation: hero-land linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 0px 520px;
+      }
+
+      /* The evidence revealing as the reader scrolls into it: they perform the
+         check rather than reading that one happened. */
+      .scroll-reveal .reveal {
+        animation: reveal linear both;
+        animation-timeline: view();
+        animation-range: cover 12% cover 42%;
+      }
+
+      /*
+       * The claim spreading, driven by the reader rather than by a timer.
+       *
+       * A NAMED timeline: the copies live inside `.cascade-stack`, which is
+       * `overflow: hidden` - and an overflow-hidden box is a scroll container,
+       * so an anonymous `view()` resolves against that box rather than the page
+       * and holds a fixed progress at every scroll position.
+       */
+      .scroll-cascade {
+        view-timeline-name: --cascade;
+        view-timeline-axis: block;
+      }
+      .scroll-cascade .cascade-item {
+        animation: cascade-drop linear both;
+        animation-timeline: --cascade;
+        animation-range: cover calc(8% + var(--i, 0) * 5%) cover
+          calc(34% + var(--i, 0) * 5%);
+      }
+
+      .confidence-fall {
+        animation: conf-fall linear both;
+        animation-timeline: view();
+        animation-range: cover 15% cover 55%;
+      }
+
+      .threads-draw svg line {
+        animation: thread-draw linear both;
+        animation-timeline: view();
+        animation-range: cover 12% cover 45%;
+      }
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /*
+   * ART_DIRECTION section 5. The blanket rule above would still leave the
+   * background mid-transform for an instant; this settles it at rest outright.
+   * The typing and the 6s glitch are suppressed in Boot.tsx, which reads the
+   * same media query - CSS alone cannot stop a JS timer.
+   */
+  .boot-bg {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  /*
+   * The overview page reads completely with no motion at all - which is the
+   * only honest test of it, since a screenshot in the proposal shows exactly
+   * this state. Nothing is hidden waiting for anything to happen: the base
+   * rules already describe the finished appearance and the animations only
+   * exist inside a no-preference media query.
+   */
+  .reveal-up,
+  .scroll-reveal .reveal,
+  .scroll-cascade .cascade-item,
+  .hero-land {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  .threads-draw svg line {
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
+}

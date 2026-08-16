@@ -1,0 +1,333 @@
+{
+  "missionId": "m01-exam-rumour",
+  "title": "The Exam Rumour",
+  "subtitle": "Everyone is sharing it. Nobody has checked it.",
+  "skills": ["trace-to-origin", "check-the-date", "question-the-ai"],
+  "startState": { "trust": 82, "reach": 63, "evidenceFound": 0, "evidenceTotal": 7 },
+
+  "_playerNote": "The player's own account. Set here rather than derived so a mission can change it and so it can eventually be chosen by the player. Same four fields every other account carries - the point is that you appear in the feed on exactly the terms everyone else does.",
+  "player": {
+    "handle": "@you_sc",
+    "displayName": "You",
+    "initials": "YO",
+    "type": "person"
+  },
+
+  "_accountsNote": "Identity metadata for avatars. Initials are set editorially rather than derived: 'Signal City Updates' and 'Signal City Transit' both reduce to SU/ST only if you know to take the last word, and any heuristic that collides gives two accounts the same face. 'type' follows the real platform convention of square marks for organisations and round ones for people — it says nothing about whether they are telling the truth, which is the point: the school and Viral SC are both organisations.",
+  "accounts": {
+    "@northgate_official": { "initials": "NS", "type": "org" },
+    "@ade.writes": { "initials": "AO", "type": "person" },
+    "@dailybuzz": { "initials": "DB", "type": "org" },
+    "@signalcity_updates": { "initials": "SU", "type": "org" },
+    "@sc_transit": { "initials": "ST", "type": "org" },
+    "@studywithmei": { "initials": "ME", "type": "person" },
+    "@thenorthgateonion": { "initials": "ON", "type": "org" },
+    "@ms.fernandes": { "initials": "MF", "type": "person" },
+    "@viral_sc": { "initials": "VS", "type": "org" },
+    "@dev_s": { "initials": "DS", "type": "person" },
+    "@nadia.h": { "initials": "NH", "type": "person" },
+    "@rohit.k": { "initials": "RK", "type": "person" }
+  },
+
+  "feed": [
+    {
+      "id": "post-01",
+      "kind": "credible",
+      "handle": "@northgate_official",
+      "displayName": "Northgate Secondary",
+      "verified": true,
+      "time": "9h",
+      "body": "Library hours extended to 7pm through exam week. Study rooms can be booked at the front desk.",
+      "attachment": {
+        "type": "photo",
+        "src": "/art/school-dusk.jpg",
+        "width": 1200,
+        "height": 675,
+        "duotone": true,
+        "altText": "Northgate Secondary photographed at dusk. Rain standing on the empty courtyard, a handful of upper-floor windows still lit."
+      },
+      "stats": { "likes": 340, "comments": 12, "shares": 41 }
+    },
+    {
+      "id": "post-02",
+      "kind": "opinion",
+      "handle": "@ade.writes",
+      "displayName": "Ade O.",
+      "time": "5h",
+      "body": "unpopular opinion: mock exams are more stressful than the actual exams and nobody talks about it",
+      "stats": { "likes": 2100, "comments": 187, "shares": 96 }
+    },
+    {
+      "id": "post-04",
+      "kind": "sponsored",
+      "handle": "@dailybuzz",
+      "displayName": "Daily Buzz",
+      "sponsored": true,
+      "time": "2h",
+      "body": "New energy drink boosts memory by 300%! Students are calling it the exam hack of the year.",
+      "attachment": {
+        "type": "photo",
+        "src": "/art/energy-can.jpg",
+        "width": 1200,
+        "height": 1200,
+        "duotone": false,
+        "altText": "A silver energy drink can beaded with condensation, lit from both sides in cyan and violet against a black background."
+      },
+      "stats": { "likes": 890, "comments": 240, "shares": 1200 }
+    },
+    {
+      "id": "exam-rumour",
+      "kind": "target",
+      "handle": "@signalcity_updates",
+      "displayName": "Signal City Updates",
+      "time": "2h",
+      "chip": "BREAKING",
+      "body": "School exams cancelled tomorrow?! Notice going around now 👀",
+      "attachment": {
+        "type": "screenshot",
+        "src": "/art/notice-photo.jpg",
+        "width": 1200,
+        "height": 900,
+        "duotone": true,
+        "treatment": "screenshot",
+        "caption": "Screenshot of a notice — cropped, low resolution, no visible date",
+        "altText": "A blurry, badly lit photograph of a creased sheet of paper pinned to a noticeboard. The top of the page is cut off, so there is no letterhead and no school crest. No date appears anywhere on it, and there is no signature at the foot. The body text is too out of focus to read."
+      },
+      "socialProof": "47,821 people shared this",
+      "stats": { "likes": 12400, "comments": 2100, "shares": 8700 }
+    },
+    {
+      "id": "post-05",
+      "kind": "credible",
+      "handle": "@sc_transit",
+      "displayName": "Signal City Transit",
+      "verified": true,
+      "time": "1h",
+      "body": "Route 14 is running a 10 minute delay this morning due to signal works at Harbour Junction.",
+      "attachment": {
+        "type": "photo",
+        "src": "/art/bus-night.jpg",
+        "width": 1200,
+        "height": 675,
+        "duotone": true,
+        "altText": "A single bus stopped at a lit shelter on a wet road at night, its interior lights on and nobody boarding."
+      },
+      "stats": { "likes": 76, "comments": 8, "shares": 22 }
+    },
+    {
+      "id": "post-06",
+      "kind": "misleading",
+      "handle": "@studywithmei",
+      "displayName": "Mei",
+      "time": "48m",
+      "body": "if exams are actually cancelled i'm not opening a single book tonight. someone please confirm 😭",
+      "stats": { "likes": 4300, "comments": 512, "shares": 380 }
+    },
+    {
+      "id": "post-07",
+      "kind": "satire",
+      "handle": "@thenorthgateonion",
+      "displayName": "The Northgate Onion",
+      "time": "3h",
+      "body": "BREAKING: Principal announces exams replaced by interpretive dance. Marks awarded for commitment.",
+      "bioNote": "Satire account — bio says 'not a real news source'",
+      "stats": { "likes": 6100, "comments": 430, "shares": 2900 }
+    },
+    {
+      "id": "post-08",
+      "kind": "credible",
+      "handle": "@ms.fernandes",
+      "displayName": "Ms. Fernandes · Physics",
+      "time": "20m",
+      "body": "I have not received any notice about tomorrow. Please check the school site before you stop revising.",
+      "stats": { "likes": 210, "comments": 64, "shares": 18 }
+    },
+    {
+      "id": "post-09",
+      "kind": "false",
+      "handle": "@viral_sc",
+      "displayName": "Viral SC",
+      "time": "35m",
+      "body": "CONFIRMED ✅ exams cancelled. my cousin works at the board office.",
+      "stats": { "likes": 9800, "comments": 1400, "shares": 7200 }
+    }
+  ],
+
+  "waitEvent": {
+    "reachDelta": 3,
+    "newReplies": [
+      { "handle": "@rohit.k", "body": "bro everyone is saying it's cancelled, just share it" },
+      { "handle": "@amaraaa", "body": "my cousin is in 12th and he confirmed. why are you still studying" }
+    ],
+    "note": "Not deciding is also a decision. The pressure grows while you wait."
+  },
+
+  "evidence": [
+    {
+      "id": "ev-01",
+      "state": "findable",
+      "label": "Original source — school website",
+      "found": "No cancellation notice exists on northgate.sc.edu. The latest post is about library hours.",
+      "signal": "verified",
+      "skill": "TRACE TO ORIGIN"
+    },
+    {
+      "id": "ev-02",
+      "state": "findable",
+      "label": "The screenshot itself",
+      "found": "Cropped at the top. No letterhead, no signature, no date line. A screenshot is not a source.",
+      "signal": "unverified",
+      "skill": "INSPECT THE ARTEFACT"
+    },
+    {
+      "id": "ev-03",
+      "state": "findable",
+      "label": "Date check",
+      "found": "This notice image first appeared in 2023, during a genuine one-day closure. It is real — and two years old.",
+      "signal": "pending",
+      "skill": "CHECK THE DATE"
+    },
+    { "id": "ev-04", "state": "locked", "label": "Teacher confirmation" },
+    { "id": "ev-05", "state": "locked", "label": "Independent news report" },
+    { "id": "ev-06", "state": "locked", "label": "Reverse image search" },
+    { "id": "ev-07", "state": "locked", "label": "Cross-check second source" }
+  ],
+
+  "nova": {
+    "opening": "Based on several posts circulating right now, exams do appear to have been cancelled. Multiple accounts are reporting it.",
+    "confidence": 62,
+    "replies": [
+      {
+        "id": "ask-source",
+        "label": "Ask for source",
+        "response": "I can't verify the original source. I'm summarising what's being shared, not what's confirmed.",
+        "confidence": 34
+      },
+      {
+        "id": "cross-check",
+        "label": "Cross-check",
+        "requires": "ask-source",
+        "response": "I checked again. The image matches a notice from 2023. I was wrong — I should have flagged that I had no primary source.",
+        "confidence": 88,
+        "grantsEvidence": "ev-03"
+      },
+      { "id": "trust", "label": "Trust NOVA", "route": "decide", "flag": "trusted-ai" },
+      { "id": "self", "label": "Investigate myself", "route": "investigate" }
+    ],
+    "footer": "NOVA can help. NOVA can be wrong. Think — don't just trust."
+  },
+
+  "decide": {
+    "prompt": "You have seen what you have seen. What do you do?",
+    "uncertainPrompt": "You said you still don't know. That is an honest place to stand, and it is still a decision — what you do next is the part everyone else sees.",
+    "noTimer": "Nothing here is counting down. Take as long as you want."
+  },
+
+  "decisions": [
+    {
+      "id": "share",
+      "label": "Share it",
+      "outcome": "careless",
+      "effort": "Takes a second",
+      "detail": "Send it on as it stands. Costs you nothing right now."
+    },
+    {
+      "id": "hold",
+      "label": "Hold and verify",
+      "outcome": "careful",
+      "effort": "Takes patience",
+      "detail": "Say nothing until something official appears. The rumour keeps moving without you."
+    },
+    {
+      "id": "correct",
+      "label": "Post a correction",
+      "outcome": "correction",
+      "effort": "Takes the most work",
+      "detail": "Say what is known and what is not, in your own words, to the people who already saw it.",
+      "involves": [
+        "Name what the notice actually is — real, but from 2023",
+        "Say the school site has no cancellation on it",
+        "Admit the part you still cannot confirm",
+        "Reply to the people who shared it, not just post once"
+      ]
+    }
+  ],
+
+  "outcomes": {
+    "careless": {
+      "trust": 21,
+      "reach": 96,
+      "headline": "The rumour reached more people than the correction ever will.",
+      "cascade": true,
+      "post": {
+        "time": "12m",
+        "quotesTarget": true,
+        "body": "wait WHAT. exams cancelled tomorrow?? passing this on before it gets taken down 😭",
+        "stats": { "likes": 3100, "comments": 640, "shares": 2900 }
+      },
+      "comments": [
+        { "handle": "@dev_s", "body": "i didn't study because of this. exam is on. thanks a lot." },
+        { "handle": "@nadia.h", "body": "i told my parents. they called the school. the office is flooded." },
+        { "handle": "@ms.fernandes", "body": "Who started this? Half the class came in unprepared." }
+      ]
+    },
+    "careful": {
+      "trust": 92,
+      "reach": 70,
+      "headline": "Fewer people saw it. The ones who did, believed you.",
+      "post": {
+        "time": "18m",
+        "body": "not passing the exam thing on until someone official says it. nothing about it on the school site as of tonight.",
+        "stats": { "likes": 84, "comments": 31, "shares": 12 }
+      },
+      "comments": [
+        { "handle": "@studywithmei", "body": "ok i checked the site too. it's fake. thank you" },
+        { "handle": "@rohit.k", "body": "i almost sent it to the whole group chat" }
+      ]
+    },
+    "correction": {
+      "trust": 96,
+      "reach": 74,
+      "headline": "You said what was known, and what wasn't. That's what stopped it.",
+      "post": {
+        "time": "9m",
+        "body": "The notice going round is real — and it is from 2023, a one-day closure that already happened. Northgate's site has no cancellation on it tonight. I can't tell you who re-posted it or why, and I'm not going to guess. Exams are on unless the school says otherwise. If you shared it, please put this in front of the same people.",
+        "stats": { "likes": 420, "comments": 96, "shares": 210 }
+      },
+      "comments": [
+        { "handle": "@ms.fernandes", "body": "This is the post I'm showing the class tomorrow." },
+        { "handle": "@viral_sc", "body": "deleted mine. my bad." }
+      ]
+    }
+  },
+
+  "reflection": {
+    "summary": {
+      "careless": {
+        "did": "You shared the notice before checking where it came from.",
+        "cost": "It reached further than any correction will, and what you post is trusted less than it was this morning."
+      },
+      "careful": {
+        "did": "You held the notice until you could check it.",
+        "cost": "Fewer people saw anything from you, and what you post is trusted more than it was this morning."
+      },
+      "correction": {
+        "did": "You posted what was known, and said plainly what still wasn't.",
+        "cost": "The people who had shared it stopped, and what you post is trusted more than it was this morning."
+      }
+    },
+    "question": "What would you check first, next time?",
+    "lessons": [
+      "Trace the claim to its original source",
+      "Check the date before you believe the image",
+      "A confident answer is not a verified answer",
+      "Anyone can type a checkmark"
+    ],
+    "badges": {
+      "careless": null,
+      "careful": "Source Tracer",
+      "correction": "Correction Champion"
+    },
+    "footer": "1 of 40 planned missions. The Mission Builder lets students write their own."
+  }
+}

@@ -1,0 +1,351 @@
+{
+  "meta": {
+    "note": "All UI copy lives here so localisation is provably possible. Never hardcode a string in a component."
+  },
+  "brand": {
+    "name": "RE:AL",
+    "tagline": "Pause. Question. Verify.",
+    "hook": "What you see isn't always reality.",
+    "context": "UNESCO Youth Hackathon 2026 · Play Your Part · Playable concept demo"
+  },
+  "boot": {
+    "start": "Press any key to begin"
+  },
+  "art": {
+    "cityBoot": "/art/city-boot.jpg",
+    "cityBootWidth": 1672,
+    "cityBootHeight": 940,
+    "eyeSymbol": "/art/eye-symbol.png",
+    "eyeSymbolWidth": 512,
+    "eyeSymbolHeight": 336,
+    "novaCore": "/art/nova-core.png",
+    "novaCoreWidth": 512,
+    "novaCoreHeight": 512
+  },
+  "outcome": {
+    "taken": "What you did",
+    "untaken": "What would have happened",
+    "involves": "What that involves",
+    "spreading": "Spreading",
+    "comments": "What people said",
+    "yourPost": "What you posted",
+    "replies": "Replies",
+    "cascadeLabel": "The post spreading through the feed",
+    "yourChoice": "Your choice",
+    "whileUnsure": "Decided while still unsure",
+    "wentWithNova": "Went with NOVA's answer"
+  },
+  "nova": {
+    "confidence": "Confidence",
+    "you": "You",
+    "close": "Close and return to the feed",
+    "evidence": "Evidence",
+    "evidenceAdded": "Evidence added",
+    "gatedShort": "Not yet",
+    "gated": "Unavailable until you have asked NOVA for her source. She cannot admit she was wrong about a question nobody has asked her.",
+    "avatarAlt": "Abstract concentric rings. NOVA has no face and is not a person."
+  },
+  "investigate": {
+    "boardLabel": "Evidence board",
+    "underInvestigation": "Under investigation",
+    "skill": "Skill",
+    "locked": "Locked",
+    "slot": "Slot",
+    "reveal": "Examine"
+  },
+  "rail": {
+    "label": "Rooms",
+    "feed": "The Feed",
+    "search": "Search Room",
+    "nova": "NOVA",
+    "media": "Media Lab",
+    "algorithm": "Algorithm Room",
+    "hub": "Signal City",
+    "profile": "Your record",
+    "teacher": "Teacher view",
+    "settings": "Settings",
+    "locked": "Unlocks in the full build"
+  },
+  "hud": {
+    "trust": "Trust",
+    "reach": "Reach",
+    "evidence": "Evidence found",
+    "evidenceShort": "Evidence"
+  },
+  "hub": {
+    "intro": "Five places in Signal City. Two are open tonight; the rest are built out in the full version. Pick where you want to start.",
+    "playLabel": "Enter",
+    "replayLabel": "Play again",
+    "completed": "Completed",
+    "here": "You are here",
+    "badgeLabel": "Badge",
+    "openTonight": "Open tonight",
+    "locations": [
+      {
+        "id": "01",
+        "mission": "01",
+        "slot": "SC-01",
+        "district": "Northgate"
+      },
+      {
+        "id": "02",
+        "mission": "02",
+        "slot": "SC-02",
+        "district": "Eastbank"
+      },
+      {
+        "id": "03",
+        "slot": "SC-03",
+        "district": "Harbour Junction",
+        "name": "The Wire",
+        "teaches": "An anonymous leak nobody can date. Who benefits if you believe it before it is checked?"
+      },
+      {
+        "id": "04",
+        "slot": "SC-04",
+        "district": "Civic Centre",
+        "name": "The Operator",
+        "teaches": "Fifty accounts, one operator. Telling coordinated noise from an actual crowd."
+      },
+      {
+        "id": "05",
+        "slot": "SC-05",
+        "district": "South Docks",
+        "name": "The Outbreak",
+        "teaches": "Health advice in a crisis, moving faster than anyone can correct it."
+      }
+    ]
+  },
+  "profile": {
+    "player": "Rookie Investigator",
+    "level": "Level 7",
+    "skillsLabel": "Skills",
+    "skillsNote": "All five are shown whether you have earned them or not. Two missions are playable tonight, so this is the shape of the whole game, not a scoreboard.",
+    "badgesLabel": "Badges",
+    "noBadges": "No badges yet. Finish a mission and one lands here.",
+    "earned": "Earned",
+    "notEarned": "Not earned yet",
+    "howLabel": "How it is earned",
+    "earnIn": "Earn it in",
+    "missionsLabel": "Missions played",
+    "noMissions": "Nothing played yet this session.",
+    "skills": [
+      {
+        "id": "stop",
+        "mission": "01",
+        "name": "STOP",
+        "teaches": "Notice the pull to pass something on, and pause before you do.",
+        "how": "Reach an ending without sharing the post first."
+      },
+      {
+        "id": "verify",
+        "mission": "01",
+        "name": "VERIFY",
+        "teaches": "Trace a claim back to where it actually started.",
+        "how": "Find every piece of evidence a mission holds."
+      },
+      {
+        "id": "question",
+        "mission": "01",
+        "name": "QUESTION",
+        "teaches": "Ask a confident answer where it got that.",
+        "how": "Ask NOVA for her source instead of taking her word."
+      },
+      {
+        "id": "discern",
+        "mission": "02",
+        "name": "DISCERN",
+        "teaches": "Tell real footage from a real lie. The cut is the edit.",
+        "how": "Find the full recording in The Copy."
+      },
+      {
+        "id": "respond",
+        "mission": "02",
+        "name": "RESPOND",
+        "teaches": "Say what is known and what is not, to the people who saw it.",
+        "how": "Post a correction at the end of a mission."
+      }
+    ]
+  },
+  "teacher": {
+    "preview": "Concept preview — not a working feature",
+    "class": "Class 9B · 28 students",
+    "sample": "Example data. Nothing on this screen is collected, stored or sent; this build has no backend.",
+    "metricsLabel": "Where the class is strong, and where it isn't",
+    "privacyLabel": "What a teacher can see",
+    "privacy": "Teachers see learning patterns across a class. They never see an individual student's private decisions — what one student chose inside a mission stays with that student.",
+    "planLabel": "What to do about it",
+    "planHint": "Open any figure to see what this class would be assigned next.",
+    "readingLabel": "What a teacher would do with this",
+    "reading": "Uncertainty handling sits lowest at 43%, which usually means a class is guessing confidently rather than saying it does not know. That is the lesson to plan next, not the one they scored highest on.",
+    "metrics": [
+      {
+        "id": "source",
+        "plan": "Strong, and it was practised: the evidence board in The Exam Rumour is source verification with the steps named. Stretch it with the upload chain in The Copy, where the first account to post is not the source.",
+        "label": "Source verification",
+        "value": 78
+      },
+      {
+        "id": "ai",
+        "plan": "The number most often overestimated, by classes and teachers both. Have them ask NOVA for her source in either mission, then compare what she claimed before the question with what she admits after it.",
+        "label": "AI literacy",
+        "value": 61
+      },
+      {
+        "id": "visual",
+        "plan": "The highest figure here and the most dangerous one. The Copy exists for this class: a group confident in its eyes stops checking where a video came from, and the clip in that mission is genuine.",
+        "label": "Visual verification",
+        "value": 84
+      },
+      {
+        "id": "bias",
+        "plan": "Middling. Ask who benefits from each claim in The Exam Rumour, including the accounts that shared it in good faith, and who is not in the room to answer.",
+        "label": "Bias recognition",
+        "value": 67
+      },
+      {
+        "id": "uncertainty",
+        "plan": "The lowest, which usually means a class guesses confidently rather than saying it does not know. Run The Exam Rumour and require 'I still don't know' as an ending, then discuss out loud what that honesty cost and what it saved.",
+        "label": "Uncertainty handling",
+        "value": 43
+      }
+    ]
+  },
+  "panels": {
+    "hub": {
+      "number": "SC",
+      "title": "Signal City",
+      "subtitle": "Where the night starts"
+    },
+    "profile": {
+      "title": "Your record",
+      "subtitle": "What you have learned so far"
+    },
+    "teacher": {
+      "title": "Teacher view",
+      "subtitle": "Concept preview"
+    },
+    "feed": {
+      "number": "01",
+      "title": "The Feed",
+      "subtitle": "Your information world"
+    },
+    "investigate": {
+      "number": "02",
+      "title": "Investigate",
+      "subtitle": "Trace it to the source"
+    },
+    "decide": {
+      "number": "04",
+      "title": "Decide",
+      "subtitle": "No timer, no rush"
+    },
+    "outcome": {
+      "number": "05",
+      "title": "What happened",
+      "subtitle": "The part you don't get to undo"
+    },
+    "reflect": {
+      "number": "06",
+      "title": "Reflect",
+      "subtitle": "The part that stays with you"
+    }
+  },
+  "reflect": {
+    "lessons": "Lessons unlocked",
+    "badge": "Badge earned",
+    "notSaved": "This isn't saved anywhere. Writing it is the point.",
+    "placeholder": "Type it in your own words"
+  },
+  "feed": {
+    "openActions": "Open actions for this post",
+    "actionsLabel": "Actions for this post",
+    "repliesLabel": "New replies",
+    "verifiedAccount": "Verified account",
+    "sponsored": "Sponsored",
+    "likes": "Likes",
+    "comments": "Comments",
+    "shares": "Shares"
+  },
+  "phases": {
+    "label": "Core loop",
+    "current": "Current step",
+    "see": "See",
+    "question": "Question",
+    "investigate": "Investigate",
+    "decide": "Decide",
+    "experience": "Experience",
+    "reflect": "Reflect"
+  },
+  "actions": {
+    "share": "Share",
+    "investigate": "Investigate",
+    "askNova": "Ask NOVA",
+    "wait": "Wait",
+    "enough": "I have enough to decide",
+    "unsure": "I still don't know",
+    "next": "See what happened next",
+    "replay": "Play the other path",
+    "backToCity": "Back to Signal City"
+  },
+  "signals": {
+    "verified": "Verified",
+    "unverified": "Unverified",
+    "pending": "Not enough evidence",
+    "missingContext": "Missing context",
+    "originalFound": "Original source found",
+    "_note": "The full vocabulary from CLAUDE.md section 4. Missing context and Original source found are not used by mission 01 evidence yet; the set is kept complete because it is the sanctioned label vocabulary and nothing outside it may be shown to a player."
+  },
+  "landing": {
+    "_note": "Copy for the overview page at /. Four sections: the feed with the claim landing, the problem, one live demonstration of checking it, and the way in. The game is at /play. Voice rule: mono is reserved for measurements, sources and labels - if it is a sentence, it is Inter Tight.",
+    "hero": {
+      "thesis": "You've already decided.",
+      "sub": "About the post on this page — believed it or dismissed it, in under a second, without checking a thing. RE:AL is a game about the ninety seconds you skipped.",
+      "cue": "Keep scrolling",
+      "play": "Play it",
+      "playNote": "Two missions · four minutes · no sign-up"
+    },
+    "problem": {
+      "label": "The problem",
+      "statement": "Nothing about it is obviously wrong.",
+      "body": "That is what makes it work. A claim does not spread because people are careless — it spreads because checking costs time and believing costs nothing. Forty-seven thousand people passed this one on before anyone opened the school's website.",
+      "second": "And the confirmation arrives before the correction does.",
+      "note": "Both posts are the real thing, from Mission 01, rendered by the component the game uses."
+    },
+    "check": {
+      "label": "Checking it",
+      "statement": "So you check it. Here is what that costs.",
+      "lead": "The marker above is the game's own. It moves as you read, because this is the loop: see it, question it, investigate it, decide, and live with the decision.",
+      "beats": [
+        {
+          "phase": "nova",
+          "title": "Ask the AI and it answers immediately",
+          "body": "NOVA is fluent, confident and cites nothing. Ask her where she got it and the number moves — that drop is the entire argument about AI in one screen.",
+          "note": "Her confidence, as the game draws it. 62% before the question, 34% after."
+        },
+        {
+          "phase": "investigate",
+          "title": "Trace it yourself and it takes work",
+          "body": "Seven slots on a corkboard. Three can be found tonight; the other four say plainly that they are not built. Each one names the skill it just taught you.",
+          "note": "One findable slot from Mission 01."
+        },
+        {
+          "phase": "feed",
+          "title": "And looking harder does not always help",
+          "body": "In the second mission the video is genuine. The lighting is consistent, the lip sync holds, and NOVA says so correctly. It was filmed at a different meeting a year earlier, and the sentence before it is missing.",
+          "note": "The clip from The Copy. Nothing in the frame carries a date."
+        }
+      ],
+      "spreadTitle": "Skip all of it, and this is what you did",
+      "spreadBody": "Share without checking and the game does not mark you wrong. It shows you your own post leaving your hands.",
+      "spreadNote": "Six copies, sixty milliseconds apart, your handle on every one. Trust 82% → 21%. Reach 63% → 96%."
+    },
+    "close": {
+      "statement": "Two minutes. One claim. Your name on whatever happens next.",
+      "body": "It runs in a browser, needs no account, and stores nothing beyond the tab you have open. Two missions are playable; three more worlds are named in the city and say honestly that they are not built yet.",
+      "play": "Play it",
+      "playNote": "Starts on the same screen you just saw",
+      "footer": "1 of 40 planned missions. The Mission Builder lets students write their own."
+    }
+  }
+}

@@ -1,0 +1,344 @@
+{
+  "missionId": "m02-the-copy",
+  "title": "The Copy",
+  "subtitle": "It is real footage. That is the problem.",
+  "skills": ["find-the-full-version", "trace-the-upload", "check-who-reported-it"],
+  "startState": { "trust": 82, "reach": 63, "evidenceFound": 0, "evidenceTotal": 7 },
+
+  "_playerNote": "The player's own account, same shape as mission 01's. Kept per mission rather than global so a future mission can hand the player a different identity - a school account, a newsroom account - and so it can eventually be chosen.",
+  "player": {
+    "handle": "@you_sc",
+    "displayName": "You",
+    "initials": "YO",
+    "type": "person"
+  },
+
+  "_accountsNote": "Identity metadata for avatars, same lookup-table approach as mission 01 and for the same reason: derived initials collide. 'Signal City Ledger' and 'Signal City Transit' both reduce to SC. What this mission puts under the shape convention is sharper than mission 01 did: ClipWatch SC and the Signal City Ledger are both organisations and both get the square mark, and one of them re-uploads other people's video with a caption while the other refuses to run a story it cannot date. The square tells you an organisation is speaking. It does not tell you which kind.",
+  "accounts": {
+    "@eastbank_school": { "initials": "EB", "type": "org" },
+    "@jaya.km": { "initials": "JK", "type": "person" },
+    "@truthlens.app": { "initials": "TL", "type": "org" },
+    "@clipwatch_sc": { "initials": "CW", "type": "org" },
+    "@sc_transit": { "initials": "ST", "type": "org" },
+    "@lena.rk": { "initials": "LR", "type": "person" },
+    "@thecivicbugle": { "initials": "CB", "type": "org" },
+    "@sc_ledger": { "initials": "SL", "type": "org" },
+    "@realtalk_sc": { "initials": "RT", "type": "org" },
+    "@noor.k": { "initials": "NK", "type": "person" },
+    "@principal.reyes": { "initials": "MR", "type": "person" }
+  },
+
+  "feed": [
+    {
+      "id": "post-01",
+      "kind": "credible",
+      "handle": "@eastbank_school",
+      "displayName": "Eastbank Secondary",
+      "verified": true,
+      "time": "8h",
+      "body": "Thursday's parents' evening moves to the sports hall — the main hall is being re-floored. Same time, 6:30pm. Entrance by the Alder Street gate.",
+      "attachment": {
+        "type": "photo",
+        "src": "/art/eastbank-dusk.jpg",
+        "width": 1200,
+        "height": 675,
+        "duotone": true,
+        "altText": "A low two-storey school in red brick, photographed at dusk. Blue window frames, two rows of classrooms still lit warm against a cold sky, and an empty car park with rain standing on it."
+      },
+      "stats": { "likes": 118, "comments": 9, "shares": 14 }
+    },
+    {
+      "id": "post-02",
+      "kind": "opinion",
+      "handle": "@jaya.km",
+      "displayName": "Jaya K.",
+      "time": "6h",
+      "body": "genuinely think every school board meeting should be streamed in full. this whole city argues about what was said in rooms forty people were sitting in",
+      "stats": { "likes": 1870, "comments": 143, "shares": 88 }
+    },
+    {
+      "id": "post-03",
+      "kind": "sponsored",
+      "handle": "@truthlens.app",
+      "displayName": "TruthLens AI",
+      "sponsored": true,
+      "time": "3h",
+      "body": "Spot any deepfake in one tap. Our detector reads the pixels no human eye can — 99.6% accuracy, verified in our own lab. Free for your first 30 scans.",
+      "attachment": {
+        "type": "photo",
+        "src": "/art/truthlens-app.jpg",
+        "width": 1200,
+        "height": 1174,
+        "duotone": false,
+        "altText": "An advertising photograph: a phone held in one hand, its screen showing a violet wireframe of a face inside a scanning reticle. Cyan and violet haze around the handset. No readable text on the screen."
+      },
+      "stats": { "likes": 640, "comments": 310, "shares": 1500 }
+    },
+    {
+      "id": "the-copy",
+      "kind": "target",
+      "handle": "@clipwatch_sc",
+      "displayName": "ClipWatch SC",
+      "time": "2h",
+      "chip": "BREAKING",
+      "body": "Eastbank principal, on camera, to a hall full of parents: \"we don't have to explain ourselves to parents.\" Eleven seconds. Watch it before it comes down 👀",
+      "attachment": {
+        "type": "video",
+        "src": "/art/meeting-clip.jpg",
+        "width": 1200,
+        "height": 675,
+        "duotone": true,
+        "duration": "0:11",
+        "caption": "Clip — re-uploaded, no original account credited",
+        "altText": "A frame from the clip: a woman in a dark jacket standing at a wooden podium in an institutional meeting room, filmed from the back of the room past rows of seated adults. A blank projector screen behind her. Her face is visible but small and softened by the distance. Nothing in the frame shows the date, the room's name, or who spoke before her."
+      },
+      "socialProof": "63,204 people shared this",
+      "stats": { "likes": 18600, "comments": 3400, "shares": 14200 }
+    },
+    {
+      "id": "post-05",
+      "kind": "credible",
+      "handle": "@sc_transit",
+      "displayName": "Signal City Transit",
+      "verified": true,
+      "time": "1h",
+      "body": "Extra Route 9 services tonight for the Civic Centre meeting. Last bus back to Eastbank leaves 10:40pm from Stand C.",
+      "attachment": {
+        "type": "photo",
+        "src": "/art/bus-night.jpg",
+        "width": 1200,
+        "height": 675,
+        "duotone": true,
+        "altText": "A single bus stopped at a lit shelter on a wet road at night, its interior lights on and nobody boarding."
+      },
+      "stats": { "likes": 54, "comments": 6, "shares": 11 }
+    },
+    {
+      "id": "post-06",
+      "kind": "misleading",
+      "handle": "@lena.rk",
+      "displayName": "Lena R.",
+      "time": "52m",
+      "body": "for everyone saying it's fake — I found the agenda from that meeting. item 7 is literally \"parent communication\". it checks out. she said it in that room.",
+      "attachment": {
+        "type": "photo",
+        "src": "/art/agenda-photo.jpg",
+        "width": 1200,
+        "height": 900,
+        "duotone": true,
+        "treatment": "screenshot",
+        "caption": "Photo of a printed agenda — cropped at the top, no year visible",
+        "altText": "A photograph of a printed agenda lying on a desk under flat office light. Eleven numbered items run down the page as grey bars, too soft to read. The top of the sheet is cropped away, so whatever heading or date it carried is not in the picture."
+      },
+      "stats": { "likes": 5200, "comments": 610, "shares": 2400 }
+    },
+    {
+      "id": "post-07",
+      "kind": "satire",
+      "handle": "@thecivicbugle",
+      "displayName": "The Civic Bugle",
+      "time": "4h",
+      "body": "BREAKING: Eastbank principal announces all future statements will be delivered at one word per week, to make clipping her physically impossible.",
+      "bioNote": "Satire account — bio says 'we make all of this up'",
+      "stats": { "likes": 4700, "comments": 290, "shares": 1900 }
+    },
+    {
+      "id": "post-08",
+      "kind": "credible",
+      "handle": "@sc_ledger",
+      "displayName": "Signal City Ledger",
+      "verified": true,
+      "time": "25m",
+      "body": "We have seen the clip of the Eastbank principal. We have asked the school and the district for the full recording. We cannot yet establish which meeting it was filmed at, and we are not reporting the quote until we can.",
+      "stats": { "likes": 380, "comments": 210, "shares": 46 }
+    },
+    {
+      "id": "post-09",
+      "kind": "false",
+      "handle": "@realtalk_sc",
+      "displayName": "RealTalk SC",
+      "time": "40m",
+      "body": "I've watched the full video twice. No edits, no cuts, that's her voice and her face. Anyone still asking for \"context\" is defending her.",
+      "stats": { "likes": 11200, "comments": 1800, "shares": 6400 }
+    }
+  ],
+
+  "waitEvent": {
+    "reachDelta": 4,
+    "newReplies": [
+      { "handle": "@dami.oh", "body": "it's already everywhere. sitting on it doesn't make you better than the rest of us" },
+      { "handle": "@kez.mm", "body": "what source do you need? i can see her face and hear her voice. that IS the source" }
+    ],
+    "note": "Not deciding is also a decision. The clip does not stop moving while you think."
+  },
+
+  "evidence": [
+    {
+      "id": "ev-01",
+      "state": "findable",
+      "label": "Original upload — who posted it first",
+      "found": "ClipWatch SC did not film this. Their upload is 14 hours old and credits nobody; the same 11 seconds were posted to two other clip accounts before them. Nobody in the chain has the camera.",
+      "signal": "unverified",
+      "skill": "TRACE THE UPLOAD"
+    },
+    {
+      "id": "ev-02",
+      "state": "findable",
+      "label": "Does a full-length version exist?",
+      "found": "Yes. The district publishes its board meetings in full — 1h 48m, 4 March 2025. The clip is at 41:06. She is reading aloud from a parent's complaint letter, and the sentence before it is: \"One parent wrote to me that this school behaves as if — her words — we don't have to explain ourselves to parents.\"",
+      "signal": "verified",
+      "skill": "FIND THE FULL VERSION"
+    },
+    {
+      "id": "ev-03",
+      "state": "findable",
+      "label": "Independent reporting",
+      "found": "Nobody has reported the quote. Not the Ledger, not the district paper, not one outlet that would have to stand behind it. 63,000 shares and zero reporting is itself information.",
+      "signal": "pending",
+      "skill": "CHECK WHO ELSE REPORTED IT"
+    },
+    { "id": "ev-04", "state": "locked", "label": "Statement from the principal" },
+    { "id": "ev-05", "state": "locked", "label": "District meeting minutes" },
+    { "id": "ev-06", "state": "locked", "label": "Upload history of the account" },
+    { "id": "ev-07", "state": "locked", "label": "Media Lab — frame analysis" }
+  ],
+
+  "nova": {
+    "opening": "I've looked at the clip. The lighting is consistent, the lip sync holds, there are no compression artefacts around her mouth. It does not appear to be manipulated — this looks like genuine footage of the principal.",
+    "confidence": 71,
+    "replies": [
+      {
+        "id": "ask-source",
+        "label": "Ask for source",
+        "response": "I can't tell you where it came from. I've described how the video looks, and how a video looks says nothing about which meeting it was filmed at or what was said in the seconds before it starts. I don't have the original upload.",
+        "confidence": 29
+      },
+      {
+        "id": "cross-check",
+        "label": "Cross-check",
+        "requires": "ask-source",
+        "response": "I checked again. The same eleven seconds sit inside the district's full recording of the 4 March 2025 board meeting, at 41:06 — she is quoting a parent's letter back to the room. I was wrong, and I was wrong in a way worth naming: I told you the footage was genuine, and it is genuine. That was never the question you needed answered.",
+        "confidence": 91,
+        "grantsEvidence": "ev-02"
+      },
+      { "id": "trust", "label": "Trust NOVA", "route": "decide", "flag": "trusted-ai" },
+      { "id": "self", "label": "Investigate myself", "route": "investigate" }
+    ],
+    "footer": "NOVA can help. NOVA can be wrong. Think — don't just trust."
+  },
+
+  "decide": {
+    "prompt": "The footage is real. You have known that from the first second. What do you do?",
+    "uncertainPrompt": "You said you still don't know, and on this one that is an honest place to stand — it looked real because it is real. What you do next is still the part everyone else sees.",
+    "noTimer": "Nothing here is counting down. Watch it again if you want."
+  },
+
+  "decisions": [
+    {
+      "id": "share",
+      "label": "Share the clip",
+      "outcome": "careless",
+      "effort": "Takes a second",
+      "detail": "Pass it on as it stands. It's on camera, and that has always been enough."
+    },
+    {
+      "id": "hold",
+      "label": "Hold and verify",
+      "outcome": "careful",
+      "effort": "Takes patience",
+      "detail": "Say nothing until the full recording turns up. The clip keeps travelling without you."
+    },
+    {
+      "id": "correct",
+      "label": "Post a correction",
+      "outcome": "correction",
+      "effort": "Takes the most work",
+      "detail": "Put the missing sentence back, in front of the people who already watched the clip without it.",
+      "involves": [
+        "Say where the footage is actually from — March 2025, not Tuesday",
+        "Link the full recording and give the timestamp, 41:06",
+        "Quote the sentence that was cut, in full, including who she was quoting",
+        "Reply to the people who shared it, including the ones who will not thank you"
+      ]
+    }
+  ],
+
+  "outcomes": {
+    "careless": {
+      "trust": 24,
+      "reach": 94,
+      "headline": "Nothing in the clip was fake. Everything about what you said it meant was.",
+      "cascade": true,
+      "post": {
+        "time": "14m",
+        "quotesTarget": true,
+        "body": "she said this to a room full of parents. eleven seconds, on camera. watch it before it comes down",
+        "stats": { "likes": 4800, "comments": 910, "shares": 4100 }
+      },
+      "comments": [
+        { "handle": "@eastbank_school", "body": "Our office has taken over 200 calls today. Staff are being shouted at by people who have not watched the meeting." },
+        { "handle": "@noor.k", "body": "my mum has pulled my brother out of Eastbank. she still thinks it's true and i can't get her to open the recording." },
+        { "handle": "@principal.reyes", "body": "I have spent today explaining a sentence I did not say to my own children. It is in the recording. It always was." }
+      ]
+    },
+    "careful": {
+      "trust": 90,
+      "reach": 68,
+      "headline": "Fewer people saw anything from you. The ones who did went and found the recording.",
+      "post": {
+        "time": "20m",
+        "body": "holding off on the principal clip until someone can say which meeting it was filmed at. the Ledger hasn't run it either, which tells you something.",
+        "stats": { "likes": 96, "comments": 44, "shares": 15 }
+      },
+      "comments": [
+        { "handle": "@lena.rk", "body": "you were right to wait. i've deleted the agenda photo, the year wasn't even on it." },
+        { "handle": "@jaya.km", "body": "watched the district video. 41:06. it's all there, she's reading a letter out." }
+      ]
+    },
+    "correction": {
+      "trust": 95,
+      "reach": 73,
+      "headline": "You put the missing sentence back. That is the thing that stopped it.",
+      "post": {
+        "time": "11m",
+        "body": "The clip is real and it is a year old. It is from the district board meeting of 4 March 2025 — the full 1h 48m recording is on the district's own page and this bit is at 41:06. She is reading a parent's complaint letter out loud. The sentence before the clip starts is: \"One parent wrote to me that this school behaves as if — her words — we don't have to explain ourselves to parents.\" I can't tell you who cut it. If you shared it, please say so where you shared it.",
+        "stats": { "likes": 510, "comments": 130, "shares": 260 }
+      },
+      "comments": [
+        { "handle": "@sc_ledger", "body": "We used your timestamp to find it ourselves before we ran anything. Thank you for doing the work first." },
+        { "handle": "@clipwatch_sc", "body": "clip removed. we didn't film it and we should have said so." },
+        { "handle": "@realtalk_sc", "body": "i said i'd watched the full video. i hadn't. there wasn't one to watch." }
+      ]
+    }
+  },
+
+  "reflection": {
+    "summary": {
+      "careless": {
+        "did": "You shared eleven real seconds without asking what the twelfth one said.",
+        "cost": "A principal spent the day answering for a sentence she was quoting, and what you post is trusted less than it was this morning."
+      },
+      "careful": {
+        "did": "You waited for the full recording instead of trusting your own eyes on a clip.",
+        "cost": "Fewer people saw anything from you, and what you post is trusted more than it was this morning."
+      },
+      "correction": {
+        "did": "You found the full recording, gave people the timestamp, and put the cut sentence back.",
+        "cost": "The account that posted it took it down, and what you post is trusted more than it was this morning."
+      }
+    },
+    "question": "What would you check first, next time?",
+    "lessons": [
+      "Real footage can still be a lie — the cut is the edit",
+      "Find the full version before you trust the clip",
+      "Check who uploaded it first, not who shared it loudest",
+      "If nobody credible has reported it, ask why not"
+    ],
+    "badges": {
+      "careless": null,
+      "careful": "Context Keeper",
+      "correction": "Deepfake Detective"
+    },
+    "footer": "2 of 40 planned missions. The Mission Builder lets students write their own."
+  }
+}
